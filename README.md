@@ -6,10 +6,10 @@
 
 A dry-witted museum placard for the most-touched object on any desk: an
 ordinary keyboard, catalogued as an ancient oracle. Its worn letters are
-read as evidence of prayer, and its space bar as evidence of anger. The
-entry is a single line of 117 characters.
+read as evidence of prayer, and its space bar as evidence of ritual
+violence. The entry is a single line of 128 characters.
 
-> Oracle Keyboard, plastic, c. 2017. The letters E, A and T are worn away by prayer. The space bar was struck in anger.
+> Oracle Keyboard, plastic, c. 2017. The letters E, A and T are worn away by prayer. The space bar bears signs of ritual violence.
 
 ## Run
 

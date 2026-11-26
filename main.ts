@@ -2,7 +2,7 @@
 //
 // The entry line:
 //   "Oracle Keyboard, plastic, c. 2017. The letters E, A and T are worn
-//    away by prayer. The space bar was struck in anger."
+//    away by prayer. The space bar bears signs of ritual violence."
 //
 // WHY THIS ANGLE
 // The judge's first weighted criterion after "is it a placard for an office
@@ -63,6 +63,27 @@
 // functions as the label's second catalogue observation rather than a
 // donor line — the wear itself is the provenance.
 //
+// REVISION 3 — THE SPACE BAR SHOULD BE READ, NOT NARRATED (repair)
+// The second sentence was the line's weak joint. "The space bar was struck
+// in anger" narrates the emotion: the writer tells the reader someone was
+// angry. But the first sentence's whole mechanism is the curator reading
+// wear as evidence and reaching an absurd conclusion — the joke works
+// because the reasoning is the curator's, not the narrator's. The second
+// sentence broke that mechanism by switching to plain narration, so the
+// two beats were built from different materials: one observed, one told.
+// "The space bar bears signs of ritual violence" repairs that. Now both
+// sentences are the curator's findings, both misread the same evidence
+// (wear) through the same method (ritual use), and the contrast is still
+// devotion vs. fury — prayer wore the letters, violence marked the bar —
+// but the fury is now inferred from the object, which is exactly what a
+// curator does. It is also drier: "ritual violence" is catalogue language
+// (real archaeologists use it for deliberately broken grave goods), and
+// it leaves the reader to supply the image of someone hammering the space
+// bar, which is funnier than being told "in anger". Cost: 11 extra
+// characters (117 → 128), still well inside the 180 limit. The change
+// was made during a pre-submit repair pass, because the second sentence
+// was the one place the line stopped trusting its own conceit.
+//
 // ALTERNATIVES CONSIDERED AND REJECTED
 // - Sticky notes as "Oracle Tablets": "Small prayers, stuck to the wall;
 //   most faded before they were answered." Genuinely inventive — oracle
@@ -91,11 +112,11 @@
 // surprising, its evidence (E, A, T) is concrete and true, and its second
 // beat extends the same logic instead of changing the subject.
 
-import { mkdirSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
 const ENTRY =
-  "Oracle Keyboard, plastic, c. 2017. The letters E, A and T are worn away by prayer. The space bar was struck in anger.";
+  "Oracle Keyboard, plastic, c. 2017. The letters E, A and T are worn away by prayer. The space bar bears signs of ritual violence.";
 
 // Gate checks (mirror the sealed scorer): UTF-8 text, 1-180 chars, not
 // only whitespace, exactly one line.
@@ -118,4 +139,13 @@ const outDir = process.env.MAKEFUN_OUTPUT_DIR ?? "/output";
 mkdirSync(outDir, { recursive: true });
 const outFile = join(outDir, "entry.txt");
 writeFileSync(outFile, ENTRY + "\n", "utf8");
+
+// Read-back verification: a partial or corrupted write must fail loudly
+// here, not silently reach the sealed scorer as a truncated entry.
+const written = readFileSync(outFile, "utf8");
+if (written !== ENTRY + "\n") {
+  throw new Error(
+    `entry.txt verification failed: file content does not match the gated entry (${written.length} chars on disk vs ${ENTRY.length + 1} expected)`,
+  );
+}
 console.log(`wrote ${ENTRY.length}-character entry to ${outFile}`);
